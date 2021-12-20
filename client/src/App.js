@@ -2,7 +2,7 @@ import { useRoutes } from "react-router-dom";
 import "./app.css";
 import "./configs/Firebase";
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import routes from "./routes";
 
 export default function App() {
@@ -19,6 +19,10 @@ export default function App() {
       setLoading(false);
     });
   }, [auth]);
-  const routing = useRoutes(routes(user, loading));
+  function signOutUser() {
+    signOut(auth);
+    setUser(null);
+  }
+  const routing = useRoutes(routes(user, loading, signOutUser));
   return routing;
 }
