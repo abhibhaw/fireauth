@@ -1,5 +1,8 @@
+import { useRoutes } from "react-router-dom";
 import "./app.css";
-import { Login } from "pages";
+import routes from "./routes";
+
 export default function App() {
-  return <Login />;
+  const routing = useRoutes(routes);
+  return routing;
 }

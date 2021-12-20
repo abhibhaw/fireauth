@@ -1,2 +1,2 @@
-export { default as FirebaseApp } from "./Firebase";
+export * from "./Firebase";
 export * from "./env/Firebase";

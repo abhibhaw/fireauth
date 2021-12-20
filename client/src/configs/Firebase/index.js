@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getAnalytics } from "firebase";
 import {
   apiKey,
   authDomain,
@@ -19,4 +19,5 @@ const firebaseConfig = {
   measurementId,
 };
 
-export default initializeApp(firebaseConfig);
+export const FirebaseApp = initializeApp(firebaseConfig);
+export const analytics = getAnalytics(FirebaseApp);

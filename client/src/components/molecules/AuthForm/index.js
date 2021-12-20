@@ -2,7 +2,12 @@ import "./styles.css";
 import { Typography, TextField, Box } from "@mui/material";
 import { CommonButton } from "components";
 
-export default function CommonForm({ title }) {
+export default function CommonForm({
+  title,
+  setEmail,
+  setPassword,
+  handleSubmit,
+}) {
   return (
     <div className="page-container">
       <div>
@@ -26,6 +31,9 @@ export default function CommonForm({ title }) {
           variant="outlined"
           type="email"
           name="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
         <TextField
           fullWidth
@@ -35,9 +43,12 @@ export default function CommonForm({ title }) {
           variant="outlined"
           type="password"
           name="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
         />
       </Box>
-      <CommonButton title={title} />
+      <CommonButton title={title} handleClick={handleSubmit} />
     </div>
   );
 }
