@@ -1,37 +1,39 @@
 import "./styles.css";
-import { CourseCard } from "components";
+import { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
+import axios from "axios";
+import { CourseCard } from "components";
+import { api } from "env";
 export default function Home() {
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    axios
+      .get(api.courses)
+      .then((res) => {
+        setCourses(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [courses]);
+
   return (
     <div className="logged-container">
       <Typography variant="h4" sx={{ m: 6 }}>
         Courses
       </Typography>
       <div className="course-container">
-        <CourseCard
-          title="Course 1"
-          desc="Course 1 on Personal Finance"
-          id={1}
-          image="https://picsum.photos/250/150"
-        />
-        <CourseCard
-          title="Course 2"
-          desc="Course 2 on Computer Science Fundamentals"
-          id={2}
-          image="https://picsum.photos/250/150"
-        />
-        <CourseCard
-          title="Course 3"
-          desc="Course 3 on Micros Architecture"
-          id={3}
-          image="https://picsum.photos/250/150"
-        />
-        <CourseCard
-          title="Course 4"
-          desc="Course 4 on System Design"
-          id={4}
-          image="https://picsum.photos/250/150"
-        />
+        {courses.length > 0
+          ? courses.map((course) => (
+              <CourseCard
+                key={course._id}
+                id={course._id}
+                desc={course.desc}
+                title={course.title}
+                image={course.imageUrl}
+              />
+            ))
+          : "No courses found"}
       </div>
     </div>
   );
