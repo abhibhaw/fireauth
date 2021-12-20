@@ -17,7 +17,7 @@ const routes = (user, loading, signOutUser) => [
     ),
     children: [
       { path: "", element: <Navigate to="/dashboard" /> },
-      { path: "dashboard", element: <Home handleClick={signOutUser} /> },
+      { path: "dashboard", element: <Home /> },
       { path: "*", element: <NotFound /> },
     ],
   },

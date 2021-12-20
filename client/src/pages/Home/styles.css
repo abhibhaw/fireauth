@@ -1,0 +1,7 @@
+.logged-container{
+    text-align: center;
+}
+.course-container{
+    display: flex;
+    justify-content: space-evenly;
+}
