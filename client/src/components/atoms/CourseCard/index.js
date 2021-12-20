@@ -1,6 +1,5 @@
 import {
   CardActionArea,
-  CardActions,
   Card,
   CardContent,
   CardMedia,
@@ -27,14 +26,12 @@ export default function CourseCard({ title, desc, image, id }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <InheritButton
-          title={"Enroll"}
-          handleClick={() => {
-            console.log(id);
-          }}
-        />
-      </CardActions>
+      <InheritButton
+        title={"Enroll"}
+        handleClick={() => {
+          console.log(id);
+        }}
+      />
     </Card>
   );
 }

@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { MainLayout } from "components";
-import { Auth, Home, NotFound } from "pages";
+import { Auth, Home, NotFound, Profile } from "pages";
 import { CircularIndeterminate } from "components";
 
 const routes = (user, loading, signOutUser) => [
@@ -18,6 +18,7 @@ const routes = (user, loading, signOutUser) => [
     children: [
       { path: "", element: <Navigate to="/dashboard" /> },
       { path: "dashboard", element: <Home /> },
+      { path: "profile", element: <Profile /> },
       { path: "*", element: <NotFound /> },
     ],
   },
