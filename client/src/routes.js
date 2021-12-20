@@ -1,5 +1,5 @@
 import { MainLayout } from "components";
-import { Login, Register } from "pages";
+import { Auth } from "pages";
 import { Navigate } from "react-router-dom";
 
 const routes = [
@@ -7,9 +7,9 @@ const routes = [
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/", element: <Navigate to="/login" /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
+      { path: "", element: <Navigate to="/login" /> },
+      { path: "login", element: <Auth id={1} /> },
+      { path: "register", element: <Auth /> },
       { path: "*", element: <Navigate to="/login" /> },
     ],
   },

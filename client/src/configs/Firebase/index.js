@@ -1,4 +1,5 @@
-import { initializeApp, getAnalytics } from "firebase";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import {
   apiKey,
   authDomain,
@@ -7,7 +8,7 @@ import {
   messagingSenderId,
   appId,
   measurementId,
-} from "configs";
+} from "env";
 
 const firebaseConfig = {
   apiKey,
