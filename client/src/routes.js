@@ -2,12 +2,13 @@ import { Navigate } from "react-router-dom";
 import { MainLayout } from "components";
 import { Auth, Home, NotFound } from "pages";
 import { CircularIndeterminate } from "components";
+
 const routes = (user, loading, signOutUser) => [
   {
     path: "app",
     element: !loading ? (
       user ? (
-        <MainLayout />
+        <MainLayout id={1} handleClick={signOutUser} />
       ) : (
         <Navigate to="/login" />
       )
