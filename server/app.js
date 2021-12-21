@@ -22,20 +22,32 @@ app.get("/courses", async (_, res) => {
 app.get("/user", async (req, res) => {
   const { uid } = req.query;
   const user = {};
-  await User.findOne({ uid }).then((res) => {
+  await User.findOne({ uid }).then(async (res) => {
     user.name = res.name;
     user.bio = res.bio;
     user.imageUrl = res.imageUrl;
-    user.courses = Course.find({ _id: { $in: res.coursesId } });
+    user.courses = await Course.find({ _id: { $in: res.coursesId } });
   });
   res.send(user);
 });
 
-app.patch("/user", async (req, res) => {
-  const { uid, name, bio, coursesEnrolled } = req.body;
+app.post("/enroll", async (req, res) => {
+  const { uid, id } = req.body;
   const user = await User.findOneAndUpdate(
     { uid },
-    { name, bio, coursesEnrolled },
+    {
+      $addToSet: { coursesId: id },
+    },
+    { new: true }
+  ).exec();
+  res.send(user);
+});
+
+app.post("/edit", async (req, res) => {
+  const { uid, name, bio } = req.body;
+  const user = await User.findOneAndUpdate(
+    { uid },
+    { name, bio },
     { runValidators: true, omitUndefined: true, new: true }
   ).exec();
   res.send(user);

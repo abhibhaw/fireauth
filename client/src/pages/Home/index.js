@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import axios from "axios";
 import { CourseCard } from "components";
 import { api } from "env";
-export default function Home() {
+export default function Home({ uid, dbUser }) {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
@@ -31,6 +31,8 @@ export default function Home() {
                 desc={course.desc}
                 title={course.title}
                 image={course.imageUrl}
+                uid={uid.uid}
+                dbUser={dbUser}
               />
             ))
           : "No courses found"}

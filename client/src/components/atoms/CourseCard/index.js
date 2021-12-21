@@ -5,9 +5,12 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import InheritButton from "../InheritButton";
+import axios from "axios";
+import { InheritButton } from "components";
+import { api } from "env";
+import { toast, ToastContainer } from "react-toastify";
 
-export default function CourseCard({ title, desc, image, id }) {
+export default function CourseCard({ title, desc, image, id, uid, dbUser }) {
   return (
     <Card sx={{ maxWidth: 250 }}>
       <CardActionArea>
@@ -26,12 +29,30 @@ export default function CourseCard({ title, desc, image, id }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <InheritButton
-        title={"Enroll"}
-        handleClick={() => {
-          console.log(id);
-        }}
-      />
+      {dbUser ? (
+        dbUser.courses.find((x) => x._id === id) ? (
+          <InheritButton title="✅ Enrolled" />
+        ) : (
+          <InheritButton
+            title={"Enroll"}
+            handleClick={() => {
+              axios.post(`${api.enroll}`, { uid, id }).then((res) => {
+                toast.success("Enrolled");
+              });
+            }}
+          />
+        )
+      ) : (
+        <InheritButton
+          title={"Enroll"}
+          handleClick={() => {
+            axios.post(`${api.enroll}`, { uid, id }).then((res) => {
+              console.log(res);
+            });
+          }}
+        />
+      )}
+      <ToastContainer />
     </Card>
   );
 }

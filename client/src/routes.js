@@ -3,7 +3,7 @@ import { MainLayout } from "components";
 import { Auth, Home, NotFound, Profile } from "pages";
 import { CircularIndeterminate } from "components";
 
-const routes = (user, loading, signOutUser) => [
+const routes = (user, loading, signOutUser, dbUser) => [
   {
     path: "app",
     element: !loading ? (
@@ -17,8 +17,8 @@ const routes = (user, loading, signOutUser) => [
     ),
     children: [
       { path: "", element: <Navigate to="/dashboard" /> },
-      { path: "dashboard", element: <Home /> },
-      { path: "profile", element: <Profile /> },
+      { path: "dashboard", element: <Home uid={user} dbUser={dbUser} /> },
+      { path: "profile", element: <Profile dbUser={dbUser} /> },
       { path: "*", element: <NotFound /> },
     ],
   },
