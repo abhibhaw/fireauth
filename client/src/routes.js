@@ -18,7 +18,10 @@ const routes = (user, loading, signOutUser, dbUser) => [
     children: [
       { path: "", element: <Navigate to="/dashboard" /> },
       { path: "dashboard", element: <Home uid={user} dbUser={dbUser} /> },
-      { path: "profile", element: <Profile dbUser={dbUser} /> },
+      {
+        path: "profile",
+        element: <Profile dbUser={dbUser} user={user} />,
+      },
       { path: "*", element: <NotFound /> },
     ],
   },
