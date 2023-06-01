@@ -1,1 +1,2 @@
 # Fireauth
+A MERN template
